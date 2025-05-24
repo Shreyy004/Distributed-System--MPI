@@ -1,0 +1,4 @@
+Basics GO:
+1. go routine
+2. remote procedure call using go
+3. remote procedure call using go over a simple distributed system

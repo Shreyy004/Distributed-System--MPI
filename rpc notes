@@ -1,0 +1,8 @@
+conditions to be satisfied by functions:
+
+2. functions need to be exported i.e. they should start with upper case letter & it should be a struct
+3. functions need to have two arguments & both should be exported i.e. start with uppercase & both arguments should be a struct
+   i) first argument - request struct i.e. input arguments as a struct
+   ii) second argument - response struct or value i.e. pointer to output
+4. it must return an error
+5. the fields inside struct must start with uppercase letter
