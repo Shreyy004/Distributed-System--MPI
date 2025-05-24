@@ -1,0 +1,49 @@
+MPI
+communicator type: MPI_Comm
+predefined default communicator: MPI_COMM_WORLD
+
+MPI_Datatype:
+MPI_CHAR, MPI_INT, MPI_FLOAT, MPI_DOUBLE, MPI_BYTE, MPI_LONG
+
+
+functions in MPI:
+i) int MPI_Init(int *argc, char ***argv) : set up
+ii) int MPI_Finalize() : tear down
+iii) int MPI_Comm_size(MPI_Comm comm, int *size) : number of processes communicating inside the communicator
+iv) int MPI_Comm_rank(MPI_Comm comm, int *rank) : local process index
+
+functions for => communication:
+v) int MPI_Send (void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm)
+vi) int MPI_Recv (void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status)
+
+typedef struct MPI_Status
+{
+int MPI_SOURCE;
+int MPI_TAG;
+int MPI_ERROR;
+};
+
+functions for => simultaneous send&receive:
+vii) int MPI_Sendrecv (void *sendbuf, int sendcount, MPI_Datatype senddatatype, int dest, int sendtag, void *recvbuf, int recvcount, MPI_Datatype recvdatatype, int src, int recvtag, MPI_Comm comm, MPI_Status *status);
+
+functions for => collective communication i.e. broadcasting
+vii) int MPI_Bcast (void *buf, int count, MPI_Datatype datatype, int source, MPI_Comm comm);
+viii) int MPI_Barrier (MPI_Comm comm); //to pause until every process is in the same spot in the code
+
+functions for => non-blocking communication
+ix) int MPI_Isend (void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm, MPI_Request *request);
+x) int MPI_Irecv (void *buf, int count, MPI_Datatype datatype, int src, int tag, MPI_Comm comm, MPI_Request *request);
+// await non-blocking completion
+xi) int MPI_Test (MPI_Request *request, int *flag, MPI_Status *status);
+xii) int MPI_Wait (MPI_Request *request, MPI_Status *status);
+
+
+MPI_ANY_SOURCE, MPI_ANY_TAG(only for recv)
+status.MPI_SOURCE
+status.MPI_TAG
+status.MPI_ERROR
+MPI_Get_count (MPI_Status *status, MPI_INIT, int *recv_count);
+
+
+xiii) int MPI_Scatter (void *sendbuf, int sendcount, MPI_Datatype sendatatype, void *recvbuf, int recvcount, MPI_Datatype recvdatatype, int src, MPI_Comm comm);
+xiv) int MPI_Gather (void *sendbuf, int sendcount, MPI_Datatype senddatatype, void *recvbuf, int recvcount, MPI_Datatype recvdatatype, int dest, MPI_Comm comm);
